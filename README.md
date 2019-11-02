@@ -3,3 +3,5 @@ First:
 
 Run tests:
 `npm test`
+
+![](testTask.gif)
