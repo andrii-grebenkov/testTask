@@ -13,7 +13,7 @@ export class CartModal {
 
   async getItemsCount() {
     await this.waitCartVisibility();
-    return $$('.cart-purchase-item').count();
+    return this.items.count();
   }
 
   private async waitCartVisibility() {
