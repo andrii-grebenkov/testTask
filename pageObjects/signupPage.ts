@@ -7,15 +7,15 @@ export class SignupPage extends BasePage {
   private password = element(By.name('password'));
   private signupButton = $('.signup-submit button');
 
-  private async setTitle(title: string){
+  private async setTitle(title: string) {
     return this.title.sendKeys(title)
   }
 
-  private async setLogin(login: string){
+  private async setLogin(login: string) {
     return this.login.sendKeys(login)
   }
 
-  private async setPassword(password: string){
+  private async setPassword(password: string) {
     return this.password.sendKeys(password)
   }
 

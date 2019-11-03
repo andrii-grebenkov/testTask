@@ -5,19 +5,19 @@ export class SearchResultItem {
   private priceSelector = '.g-price-uah';
   private titleSelector = '.g-i-tile-i-title';
 
-  constructor(elem: ElementFinder){
+  constructor(elem: ElementFinder) {
     this.item = elem;
   }
 
-  async getTitle(){
+  async getTitle() {
     return this.item.$(this.titleSelector).getText();
   }
 
-  async getPrice(){
+  async getPrice() {
     return this.item.$(this.priceSelector).getText();
   }
 
-  async select(){
+  async select() {
     return this.item.click();
   }
 }

@@ -5,7 +5,7 @@ const ENDPOINT = 'https://www.1secmail.com/api/v1/';
 const DOMAIN = '1secmail.com';
 
 export class MailService {
-  private getRequestOptions(action: string, login: string, id?: number){
+  private getRequestOptions(action: string, login: string, id?: number) {
     let uri = `${ENDPOINT}?action=${action}&login=${login}&domain=${DOMAIN}`;
     if (id) {
       uri += `&id=${id}`;
@@ -20,17 +20,17 @@ export class MailService {
     return `${login}@${DOMAIN}`;
   }
 
-  async getEmailList(login: string){
+  async getEmailList(login: string) {
     const requestOptions = this.getRequestOptions('getMessages', login);
     return rp(requestOptions);
   }
 
-  async getEmail(login: string, id: number){
+  async getEmail(login: string, id: number) {
     const requestOptions = this.getRequestOptions('readMessage', login, id);
     return rp(requestOptions);
   }
 
-  async getEmailBody(email: any){
+  async getEmailBody(email: any) {
     return email.body;
   }
 
@@ -47,7 +47,7 @@ export class MailService {
     return CONFIRMATION_LINK_REGEXP.exec(emailBody)[0];
   }
 
-  async navigateByConfirmationLink(link: string){
+  async navigateByConfirmationLink(link: string) {
     return browser.get(link);
   }
 }

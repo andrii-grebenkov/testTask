@@ -5,15 +5,15 @@ export class CartItem {
   private priceSelector = '.g-price-uah';
   private titleSelector = '.purchase-title';
 
-  constructor(elem: ElementFinder){
+  constructor(elem: ElementFinder) {
     this.item = elem;
   }
 
-  async getTitle(){
+  async getTitle() {
     return this.item.$(this.titleSelector).getText();
   }
 
-  async getPrice(){
+  async getPrice() {
     return this.item.$(this.priceSelector).getText();
   }
 }
