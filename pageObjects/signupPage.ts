@@ -1,5 +1,5 @@
-import { $, browser, By, element, ExpectedConditions as EC } from "protractor";
-import { BasePage } from "./basePage";
+import { $, browser, By, element, ExpectedConditions as EC } from 'protractor';
+import { BasePage } from './basePage';
 
 export class SignupPage extends BasePage {
   private title = element(By.name('title'));
@@ -26,7 +26,7 @@ export class SignupPage extends BasePage {
     await this.setPassword(password);
   }
 
-  async submitForm(){
+  async submitForm() {
     return this.signupButton.click();
   }
 }

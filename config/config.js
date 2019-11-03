@@ -1,5 +1,4 @@
 require("ts-node").register();
-process.env.TS_NODE_FILES = 'true';
 
 const protractorConfig = {
   directConnect: true,

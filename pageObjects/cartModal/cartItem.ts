@@ -1,4 +1,4 @@
-import { ElementFinder } from "protractor";
+import { ElementFinder } from 'protractor';
 
 export class CartItem {
   private item: ElementFinder;
@@ -15,9 +15,5 @@ export class CartItem {
 
   async getPrice(){
     return this.item.$(this.priceSelector).getText();
-  }
-
-  async isPresentInCart(){
-    return this.item.isDisplayed();
   }
 }

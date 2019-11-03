@@ -1,10 +1,10 @@
-import { $, browser, protractor, ExpectedConditions as EC } from "protractor";
-import { CartModal } from "./cartModal";
+import { $, protractor} from 'protractor';
+import { CartModal } from './cartModal';
 
 export class BasePage {
   private searchField = $('input[class*="search"]');
   private languagePopupCloseButton = $('.popup-close');
-  cartModal = new CartModal();
+  public cartModal = new CartModal();
 
   async search(inputText: string) {
     await this.searchField.sendKeys(inputText);

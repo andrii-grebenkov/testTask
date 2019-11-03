@@ -1,13 +1,13 @@
-import { browser } from "protractor";
-import { HomePage } from "../pageObjects/homePage";
-import { SignupPage } from "../pageObjects/signupPage";
-import { MailService } from "../services/mailService";
-import { MyAccountPage } from "../pageObjects/myAccountPage";
-import { SearchResultsPage } from "../pageObjects/searchResultsPage";
+import { browser } from 'protractor';
+import { HomePage } from '../pageObjects/homePage';
+import { SignupPage } from '../pageObjects/signupPage';
+import { MailService } from '../services/mailService';
+import { MyAccountPage } from '../pageObjects/myAccountPage';
+import { SearchResultsPage } from '../pageObjects/searchResultsPage';
+import { ProductItemPage } from '../pageObjects/productItemPage';
 import { expect } from 'chai';
-import { ProductItemPage } from "../pageObjects/productItemPage";
 
-describe("User", async () => {
+describe('User', async () => {
   const homePage = new HomePage();
   const signupPage = new SignupPage();
   const myAccountPage = new MyAccountPage();
@@ -24,7 +24,7 @@ describe("User", async () => {
     await browser.waitForAngularEnabled(false);
   });
 
-  it("should sign up successfully", async () => {
+  it('should sign up successfully', async () => {
     await homePage.open();
     await homePage.proceedToSignupPage();
 
@@ -39,7 +39,7 @@ describe("User", async () => {
     expect(confirmationMessage).to.equal('Адрес электронной почты подтвержден, спасибо', 'Confirmation message should appear but doesn\'t')
   });
 
-  it("should add Apple iPhone X to cart successfully", async () => {
+  it('should add Apple iPhone X to cart successfully', async () => {
     await myAccountPage.search('Apple iPhone X');
     const firstResult = await searchResultsPage.getFirstResult();
 

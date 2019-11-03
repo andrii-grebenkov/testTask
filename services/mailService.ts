@@ -1,11 +1,10 @@
 import * as rp from 'request-promise'
-import { browser } from "protractor";
+import { browser } from 'protractor';
 const CONFIRMATION_LINK_REGEXP = /https.*confirmEmail.*confirm/;
 const ENDPOINT = 'https://www.1secmail.com/api/v1/';
 const DOMAIN = '1secmail.com';
 
 export class MailService {
-
   private getRequestOptions(action: string, login: string, id?: number){
     let uri = `${ENDPOINT}?action=${action}&login=${login}&domain=${DOMAIN}`;
     if (id) {
