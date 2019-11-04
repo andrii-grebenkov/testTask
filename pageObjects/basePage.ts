@@ -12,7 +12,7 @@ export class BasePage {
     return this.searchField.sendKeys(protractor.Key.ENTER);
   }
 
-  async closeLanguagePopup() {
+  closeLanguagePopup() {
     this.languagePopupCloseButton.click();
   }
 }

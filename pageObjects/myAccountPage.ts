@@ -4,11 +4,11 @@ import { BasePage } from './basePage';
 export class MyAccountPage extends BasePage {
   private confirmationMessage = $('#personal_information_content .message');
 
-  async getConfirmationText() {
+  getConfirmationText() {
     return this.confirmationMessage.getText();
   }
 
-  async isConfirmationMsgPresent() {
+  isConfirmationMsgPresent() {
     return this.confirmationMessage.isDisplayed();
   }
 }

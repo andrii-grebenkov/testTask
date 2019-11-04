@@ -41,7 +41,7 @@ describe('User', async () => {
     expect(confirmationMessage).to.equal('Адрес электронной почты подтвержден, спасибо', 'Confirmation message is incorrect')
   });
 
-  it('should add Apple iPhone X to cart successfully', async () => {
+  xit('should add Apple iPhone X to cart successfully', async () => {
     await myAccountPage.search('Apple iPhone X');
     const firstResult = await searchResultsPage.getFirstResult();
 

@@ -9,15 +9,15 @@ export class SearchResultItem {
     this.item = elem;
   }
 
-  async getTitle() {
+  getTitle() {
     return this.item.$(this.titleSelector).getText();
   }
 
-  async getPrice() {
+  getPrice() {
     return this.item.$(this.priceSelector).getText();
   }
 
-  async select() {
+  select() {
     return this.item.click();
   }
 }

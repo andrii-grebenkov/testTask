@@ -20,17 +20,17 @@ export class MailService {
     return `${login}@${DOMAIN}`;
   }
 
-  async getEmailList(login: string) {
+  getEmailList(login: string) {
     const requestOptions = this.getRequestOptions('getMessages', login);
     return rp(requestOptions);
   }
 
-  async getEmail(login: string, id: number) {
+  getEmail(login: string, id: number) {
     const requestOptions = this.getRequestOptions('readMessage', login, id);
     return rp(requestOptions);
   }
 
-  async getEmailBody(email: any) {
+  getEmailBody(email: any) {
     return email.body;
   }
 
@@ -39,15 +39,15 @@ export class MailService {
     await browser.wait(async () => {
       emails = await this.getEmailList(login);
       return !!emails.length;
-    }, 10000);
+    }, 15000);
 
     const emailId = emails[0].id;
     const email = await this.getEmail(login, emailId);
-    const emailBody = await this.getEmailBody(email);
+    const emailBody = this.getEmailBody(email);
     return CONFIRMATION_LINK_REGEXP.exec(emailBody)[0];
   }
 
-  async navigateByConfirmationLink(link: string) {
+  navigateByConfirmationLink(link: string) {
     return browser.get(link);
   }
 }

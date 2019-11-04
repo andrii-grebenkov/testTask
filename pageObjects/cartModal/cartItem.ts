@@ -9,11 +9,11 @@ export class CartItem {
     this.item = elem;
   }
 
-  async getTitle() {
+  getTitle() {
     return this.item.$(this.titleSelector).getText();
   }
 
-  async getPrice() {
+  getPrice() {
     return this.item.$(this.priceSelector).getText();
   }
 }

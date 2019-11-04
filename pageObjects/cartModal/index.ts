@@ -16,7 +16,7 @@ export class CartModal {
     return this.items.count();
   }
 
-  private async waitCartVisibility() {
+  private waitCartVisibility() {
     return browser.wait(EC.visibilityOf(this.modalContainer), 5000, 'Cart should be displayed but doesn\'t');
   }
 }
