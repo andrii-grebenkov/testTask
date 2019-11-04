@@ -1,5 +1,6 @@
-import { $, protractor} from 'protractor';
+import {$, browser, protractor} from 'protractor';
 import { CartModal } from './cartModal';
+const SIGNUP_LINK = 'https://my.rozetka.com.ua/ua/signup/';
 
 export class BasePage {
   private searchField = $('input[class*="search"]');
@@ -14,5 +15,9 @@ export class BasePage {
 
   closeLanguagePopup() {
     this.languagePopupCloseButton.click();
+  }
+
+  proceedToSignupPage() {
+    return browser.get(SIGNUP_LINK);
   }
 }
