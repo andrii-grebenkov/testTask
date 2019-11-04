@@ -7,4 +7,8 @@ export class MyAccountPage extends BasePage {
   async getConfirmationText() {
     return this.confirmationMessage.getText();
   }
+
+  async isConfirmationMsgPresent() {
+    return this.confirmationMessage.isDisplayed();
+  }
 }
