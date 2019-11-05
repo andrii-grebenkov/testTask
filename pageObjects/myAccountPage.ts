@@ -1,4 +1,4 @@
-import { $ } from 'protractor';
+import {$, browser, ExpectedConditions as EC} from 'protractor';
 import { BasePage } from './basePage';
 
 export class MyAccountPage extends BasePage {
@@ -8,7 +8,10 @@ export class MyAccountPage extends BasePage {
     return this.confirmationMessage.getText();
   }
 
-  isConfirmationMsgPresent() {
-    return this.confirmationMessage.isDisplayed();
+  async isConfirmationMsgPresent() {
+    await browser.manage().timeouts().implicitlyWait(3000);
+    const isDisplayed = EC.visibilityOf(this.confirmationMessage)();
+    await browser.manage().timeouts().implicitlyWait(0);
+    return isDisplayed;
   }
 }
