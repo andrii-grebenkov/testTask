@@ -35,8 +35,7 @@ describe('User', async () => {
     const confirmationLink = await mailService.getConfirmationLink(testLogin);
     await mailService.navigateByConfirmationLink(confirmationLink);
 
-    expect(await myAccountPage.isConfirmationMsgPresent()).to.equal(true, 'Confirmation message doesn\'t appear');
-
+    await browser.wait(myAccountPage.isConfirmationMsgPresent(), 3000, 'Confirmation message doesn\'t appear');
     const confirmationMessage = await myAccountPage.getConfirmationText();
     expect(confirmationMessage).to.equal('Адрес электронной почты подтвержден, спасибо', 'Confirmation message is incorrect')
   });

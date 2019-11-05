@@ -8,10 +8,7 @@ export class MyAccountPage extends BasePage {
     return this.confirmationMessage.getText();
   }
 
-  async isConfirmationMsgPresent() {
-    await browser.manage().timeouts().implicitlyWait(3000);
-    const isDisplayed = EC.visibilityOf(this.confirmationMessage)();
-    await browser.manage().timeouts().implicitlyWait(0);
-    return isDisplayed;
+  isConfirmationMsgPresent() {
+    return EC.visibilityOf(this.confirmationMessage);
   }
 }
