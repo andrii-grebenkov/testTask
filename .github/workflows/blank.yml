@@ -1,0 +1,95 @@
+name: Deploy
+on: ['deployment']
+
+jobs:
+  deployment:
+    runs-on: 'ubuntu-latest'
+    env:
+      PACKAGE_NAME: '@tct/web-ui-booking'
+      AWS_S3_BUCKET: ${{ secrets[format('AWS_S3_BUCKET_{0}', github.event.deployment.environment )] }}
+      AWS_ACCESS_KEY_ID: ${{ secrets[format('AWS_ACCESS_KEY_ID_{0}', github.event.deployment.environment )] }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets[format('AWS_SECRET_ACCESS_KEY_{0}', github.event.deployment.environment )] }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      SCRIPTS_FOLDER: book_dist
+      NGSW_FILES_FOLDER: book
+      OWNERS: ${{ secrets.OWNERS }}
+
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.sha }}
+      if: contains(env.OWNERS, github.actor)
+
+    - name: 'Deployment pending'
+      uses: 'deliverybot/deployment-status@master'
+      with:
+        state: 'pending'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Compute SOURCE_DIR variable
+      run: |
+        export SOURCE_DIR=`npm get prefix`/lib/node_modules/$PACKAGE_NAME/dist/app
+        echo "::set-env name=SOURCE_DIR::$SOURCE_DIR"
+
+    - name: Clone built artefact
+      run: |
+        npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
+        APP_VERSION=`node -p "require('./package.json').version"`
+        npm i -g $PACKAGE_NAME@$APP_VERSION --production --ignore-scripts
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+    - name: Deploy static site to S3 bucket
+      run: |
+        cd $SOURCE_DIR
+        mkdir $NGSW_FILES_FOLDER
+        mv ngsw-worker.js $NGSW_FILES_FOLDER
+        mv ngsw.json $NGSW_FILES_FOLDER
+        mkdir $SCRIPTS_FOLDER
+        mv *.js $SCRIPTS_FOLDER
+        mv assets $SCRIPTS_FOLDER
+        mv favicon.* $SCRIPTS_FOLDER
+        mv *.json $SCRIPTS_FOLDER
+        aws s3 rm s3://$AWS_S3_BUCKET --recursive
+        aws s3 sync $SOURCE_DIR s3://$AWS_S3_BUCKET --delete
+
+    # Notification part
+
+    - name: 'Deployment success'
+      if: success()
+      uses: 'deliverybot/deployment-status@master'
+      with:
+        state: 'success'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Send notification to MS Teams
+      uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
+      if: success()
+      with:
+        webhook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        message: Deploy to ${{github.event.deployment.environment}} success in [${{ github.repository }}](https://github.com/${{ github.repository }}). [@${{github.actor}}](https://github.com/${{github.actor}}) good job! Please check [integration](https://integration.thomascook.io/book/getToken).
+
+    - name: Send notification to MS Teams
+      uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
+      if: failure()
+      with:
+        webhook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        message: Deploy to ${{github.event.deployment.environment}} failed. [@${{github.actor}}](https://github.com/${{github.actor}}) please check [${{ github.repository }}](https://github.com/${{ github.repository }}).
+
+    - name: 'Deployment failure'
+      if: failure()
+      uses: 'deliverybot/deployment-status@master'
+      with:
+        state: 'failure'
+        token: ${{ secrets.GITHUB_TOKEN }}
