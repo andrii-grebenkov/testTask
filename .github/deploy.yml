@@ -1,4 +1,8 @@
 # View examples and documentation at https://deliverybot.dev/docs/
 production:
-  environment: production
+  environment: PRODUCTION
   production_environment: true
+
+staging:
+  environment: STAGING
+  production_environment: false
