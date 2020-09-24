@@ -1,5 +1,5 @@
 First:
-`npm install`2
+`npm install`
 
 Run tests:
 `npm test`
@@ -7,4 +7,4 @@ Run tests:
 ![](testTask.gif)
 
 
-version: 1.0.0
+1.0.0
