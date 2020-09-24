@@ -1,5 +1,5 @@
 First:
-`npm install`
+`npm install`2
 
 Run tests:
 `npm test`
