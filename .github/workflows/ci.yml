@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches:
+    - master
+    - '*-patch'
+  pull_request:
+    branches:
+    - master
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Bump minor version
+      if: github.ref == 'refs/heads/master'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git pull origin master
+        npm version minor
+        git push origin master
+
+    - name: Bump patch version
+      if: contains(github.ref, 'patch')
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        npm version patch
+        git push
