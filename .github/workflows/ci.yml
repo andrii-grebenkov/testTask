@@ -32,4 +32,4 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         npm version patch
-        git push
+        git push origin HEAD
