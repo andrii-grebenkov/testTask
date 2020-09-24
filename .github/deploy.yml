@@ -2,7 +2,7 @@
 production:
   environment: PRODUCTION
   production_environment: true
-  required_contexts: ['deliverybot/promotion']
+  required_contexts: ['deployment']
 
 staging:
   environment: STAGING
