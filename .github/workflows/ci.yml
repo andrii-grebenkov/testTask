@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Bump minor version
+    - name: Bump minor version 2
       if: github.ref == 'refs/heads/master'
       run: |
         git config --local user.email "action@github.com"
