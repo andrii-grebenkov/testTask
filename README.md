@@ -1,7 +1,7 @@
 First:
 `npm install`
 
-Run tests :
+Run tests:
 `npm test`
 
 ![](testTask.gif)
