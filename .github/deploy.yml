@@ -11,4 +11,4 @@ staging:
 integration:
   environment: INTEGRATION
   production_environment: true
-  auto_deploy_on: refs/heads/master
+  auto_deploy_on: pr
