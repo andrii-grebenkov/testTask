@@ -2,9 +2,8 @@ name: ci
 
 on:
   push:
-    branches:
-    - master
-    - '*-patch'
+    branches: 
+    - '*'
   pull_request:
     branches:
     - master
