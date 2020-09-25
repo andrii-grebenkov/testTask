@@ -12,3 +12,4 @@ integration:
   environment: INTEGRATION
   production_environment: true
   auto_deploy_on: pr
+  required_contexts: []
