@@ -22,17 +22,17 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git push origin HEAD 
-        npm version minor --tag
-        git push origin HEAD
+        git pull origin HEAD
+        npm version minor
+        git push origin HEAD --tags
 
     - name: Bump patch version
       if: contains(github.ref, 'patch')
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        npm version patch --tag
-        git push origin HEAD
+        npm version patch
+        git push origin HEAD --tags
         
   everyTime:
     runs-on: ubuntu-latest
