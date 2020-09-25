@@ -7,3 +7,8 @@ production:
 staging:
   environment: STAGING
   production_environment: false
+
+integration:
+  environment: INTEGRATION
+  production_environment: false
+  auto_deploy_on: refs/tags/*
