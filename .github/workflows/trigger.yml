@@ -3,7 +3,7 @@ name: trigger
 on:
   push:
     tags: 
-    - v.1.*
+    - v1.*
 
 jobs:   
   everyTimeTrigger:
