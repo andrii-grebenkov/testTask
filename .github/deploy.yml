@@ -12,4 +12,4 @@ integration:
   environment: INTEGRATION
   production_environment: true
   auto_deploy_on: refs/tags/*
-  required_contexts: []
+  required_contexts: ['build']
