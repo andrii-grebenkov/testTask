@@ -23,7 +23,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git pull origin HEAD
         npm version minor
-        git push origin/master HEAD --tags
+        git push origin master HEAD --tags
 
     - name: Bump patch version
       if: contains(github.ref, 'patch')
@@ -31,7 +31,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         npm version patch
-        git push origin/master HEAD --tags
+        git push origin master HEAD --tags
         
   everyTime:
     runs-on: ubuntu-latest
