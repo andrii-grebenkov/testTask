@@ -21,9 +21,9 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git pull origin HEAD
+        git pull origin master
         npm version minor
-        git push origin HEAD --tags
+        git push origin HEAD:master
 
     - name: Bump patch version
       if: contains(github.ref, 'patch')
