@@ -2,8 +2,10 @@ name: trigger
 
 on:
   push:
-    tags: 
-    - v1.*.*
+    branches: 
+    - master
+    - main
+    - r*
 
 jobs:   
   everyTimeTrigger:
