@@ -23,7 +23,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git pull origin HEAD
         npm version minor
-        git push
+        git push --tags
 
     - name: Bump patch version
       if: contains(github.ref, 'patch')
